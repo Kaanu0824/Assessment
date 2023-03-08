@@ -10,6 +10,7 @@ router.post('/signup', [
     check("password", "Password at least should be 6 characters").isLength({min: 6}),
   ] ,signup)
 
+  
 router.post('/signin', signin)
 
 router.get("/signout", signout)

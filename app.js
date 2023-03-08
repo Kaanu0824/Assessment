@@ -29,10 +29,8 @@ app.use(cors())
 //import the routes
 const userRoutes = require("./routes/user")
 
-
 //using routes
 app.use('/api',userRoutes) // =localhost:5000/api/signup
-
 
 const port = process.env.PORT || 8000
 
