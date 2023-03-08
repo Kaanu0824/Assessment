@@ -5,7 +5,6 @@ var jwt = require('jsonwebtoken')
 const {validationResult} = require('express-validator')
 
 
-
 exports.signup = (req, res) => {
   const errors = validationResult(req)
 
