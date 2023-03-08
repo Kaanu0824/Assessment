@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const Task =require("../models/task")
 const user = require("../models/user")
 var expressJwt = require('express-jwt')
 var jwt = require('jsonwebtoken')
@@ -80,6 +81,22 @@ exports.getAllUsers = (req, res) => {
         error: "No users found"
       });
     }
-    res.json(users);
+    res.json(users);x
   });
 };
+
+exports.task= async (req, res) => {
+  try {
+    const task = new Task({
+      name: req.body.name,
+      description: req.body.description,
+      priority: req.body.priority,
+    });
+    await task.save();
+    res.status(201).json(task);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
