@@ -25,7 +25,14 @@ mongoose.connect(process.env.DATABASE,{
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(cors())
- 
+
+//import the routes
+const userRoutes = require("./routes/user")
+
+//using routes
+app.use('/api',userRoutes)
+
+
 const port = process.env.PORT || 8000
 
 //Starting a server
