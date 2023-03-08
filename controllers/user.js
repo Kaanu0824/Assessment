@@ -100,3 +100,27 @@ exports.task= async (req, res) => {
   }
 };
 
+// Page Count and Limit
+ exports.pagination=async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  try {
+    const tasks = await Task.find()
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
+
+    const count = await Task.countDocuments().exec();
+
+    res.json({
+      tasks,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
