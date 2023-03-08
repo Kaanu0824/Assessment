@@ -2,9 +2,10 @@ const User = require("../models/user")
 const user = require("../models/user")
 var expressJwt = require('express-jwt')
 var jwt = require('jsonwebtoken')
-const {validationResult} = require('express-validator')
+const {validationResult} = require('express-validator') //Checking DB error
 
 
+// In here export signup,signin,signout function
 exports.signup = (req, res) => {
   const errors = validationResult(req)
 
@@ -14,6 +15,7 @@ exports.signup = (req, res) => {
     })
   }
 
+  //This will be create new user if we have any error show error Message
   const user = new User(req.body)
   user.save((err, user) => {
     if(err) {
@@ -21,10 +23,9 @@ exports.signup = (req, res) => {
         error: "Unable to add user"
       })
     }
-
+    // if it's sucess this will return sc message
     return res.json({
       message: "Success",
-      user
     })
   })
 }

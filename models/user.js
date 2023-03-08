@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const crypto = require("crypto");
 const uuidv1 = require("uuid/v1");
 
+//User Schema Creation
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,6 +28,8 @@ const userSchema = new mongoose.Schema({
   salt: String,
 }, {timestamps: true})
 
+
+//Password Encrypt
 userSchema.virtual("password")
   .set(function(password) {
     this._password = password
